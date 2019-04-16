@@ -1,2 +1,2 @@
 # BDSIM
-Simulator of the biodiesel production process for data generation
+A benchmark simulator for testing and developing data-driven methods
