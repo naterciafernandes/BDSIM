@@ -35,18 +35,8 @@
 %      J>S: overshoot case 
 
 
-  function y = stiction (u, uOLD, yOLD, S, J)
+  function output = stiction (u, uOLD, yOLD, duOLD, us, stp, d, S, J)
 
-  persistent duOLD d stp us                % keep these vrs in memory until next call
-
-
-  % Initialization in the first time this function is called
-    if isempty (d)
-      duOLD = 0;                           % duOLD = u(t-1) - u(t-2)
-      stp = 0;                             % valve is stopped now
-      us = uOLD +(S-J)/2;                  % order when the valve initially stopped
-      d = -1;                              % direction of frictional force
-    end
 
   % Check if lower and upper bounds of the controller output are satisfied
     min = 0;
@@ -81,7 +71,7 @@
       y = yOLD;                    % valve doesn't move
     end
 
-    duOLD = du;
+    output = [y du us stp d];
 
 
   end

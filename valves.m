@@ -24,12 +24,32 @@
 
   function [position] = valves (nvalves, order, orderOLD, positionOLD, vfaults, dt)
 
+  persistent duOLD d stp us                       % keep these vrs in memory until next call
+
+
+  % Initialization (for all valves) at the first time this function is called
+    if isempty (d)                                % For each valve:
+      duOLD = zeros (1, nvalves);                 % duOLD = u(t-1) - u(t-2)
+      stp = zeros (1, nvalves);                   % valve is stopped now
+      us = orderOLD +(vfaults.S -vfaults.J)/2;    % order when the valve initially stopped
+      d = -ones (1, nvalves);                     % direction of frictional force
+    end
+
 
   % For each valve, update the signal taking stiction into account
     for k = 1 : nvalves
+      ord = order(k);
+      ordOLD = orderOLD(k);
+      posOLD = positionOLD(k);
       S = vfaults.S(k);
       J = vfaults.J(k);
-      position(k) = stiction (order(k), orderOLD(k), positionOLD(k), S, J);
+      output = stiction (ord, ordOLD, posOLD, duOLD(k), us(k), stp(k), d(k), S, J);
+      position(k) = output(1);
+      duOLD(k) = output(2);
+      us(k) = output(3);
+      stp(k) = output(4);
+      d(k) = output(5);
+
     end
 
 
