@@ -1,2 +1,2 @@
 # BDSIM
-A benchmark simulator for testing and developing data-driven methods
+A benchmark process simulator for testing and developing data-driven methods
