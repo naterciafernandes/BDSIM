@@ -49,6 +49,7 @@
     % time unit of flowrates
     sp(:,4) = sp(:,4)/3600;                                   % kg/h -> kg/s
     pid.kc(:,4) = pid.kc(:,4)*3600;                           % %/(kg/h) -> %/(kg/s)
+    sfaults.b(:,4) = sfaults.b(:,4)/3600;                     % kg/h -> kg/s
     sfaults.noise_std(4) = sfaults.noise_std(4)/3600;         % kg/h -> kg/s
     % for pores radius: meters --> micrometers
     % (to prevent possible numerical problems due to too small values)
