@@ -99,7 +99,8 @@
     armax.phi        = [   0   .05   .03    0   .01     0];  % weight for input at t-1
     armax.theta      = [   0   .06   .07    0   .00     0];  % weight for noise at t-1
     armax.eta        = [   0   .95   .97    0   .98     0];  % weight for exogenous input
-    armax.unoise_std = [   0   .10   .01    0   .01     0];  % noise standard deviation
+    armax.unoise_std = [   0   .10  1.15    0   .01     0];  % noise standard deviation
+                                                             % [armax.unoise_std] = [u0]    
 
   % Exogenous inputs for disturbances along time
     d = u0 .* ones (lt, lu);                                % defaults (constant) from u0
