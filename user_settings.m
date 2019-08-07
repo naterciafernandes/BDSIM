@@ -101,7 +101,7 @@
     armax.eta        = [   0   .95   .97    0   .98     0];  % weight for exogenous input
     armax.unoise_std = [   0   .10  1.15    0   .01     0];  % noise standard deviation
                                                              % [armax.unoise_std] = [u0]
-                                                             
+
   % Exogenous inputs for disturbances along time
     d = u0 .* ones (lt, lu);                                % defaults (constant) from u0
     d(:,2) = d(:,2) +3*sin (pi/(12*3600)*t);                % daily changes for Tmet, K
