@@ -46,6 +46,7 @@
     % molar flowrate from massic flowrate
     d(:,3) = d(:,3)/p.Mm/3600;                                % kg/h -> mol/s
     u0 = d(1,:);
+    armax.unoise_std(3) = armax.unoise_std(:,3)/p.Mm/3600;    % kg/h -> mol/s
     % time unit of flowrates
     sp(:,4) = sp(:,4)/3600;                                   % kg/h -> kg/s
     pid.kc(:,4) = pid.kc(:,4)*3600;                           % %/(kg/h) -> %/(kg/s)
@@ -59,7 +60,7 @@
   % Imposing ARMAX parameters
   % (so that the last issued controller order is preserved
   % at time instants when the controller isn't supposed to
-  % issue any order (ie, when t isn't multiple of nic))
+  % issue any order (ie, when t/dt isn't multiple of nic))
     mode = logical (mode);                                    % control loop mode: 0-MANUAL
                                                               %                    1-AUTO  
     luAUTO = nnz (mode);                                      % # of input vrs from loops in AUTO mode
